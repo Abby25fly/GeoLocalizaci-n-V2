@@ -12,16 +12,14 @@ const app = {
         streetViewControl:false
     });
 
-    let inputOrigen = document.getElementById('origen');
-    let autocompleteOrigen = new google.maps.places.Autocomplete(inputOrigen);
+    let autocompleteOrigen = new google.maps.places.Autocomplete($("#origen")[0], {});
     autocompleteOrigen.bindTo('bounds', app.map);
     let detalleUbicacionOrigen = new google.maps.InfoWindow();
     let markerOrigen = app.crearMarcador(app.map);
 
     app.crearListener(autocompleteOrigen, detalleUbicacionOrigen, markerOrigen);
 
-    let inputDestino = document.getElementById('destino');
-    let autocompleteDestino = new google.maps.places.Autocomplete(inputDestino);
+    let autocompleteDestino = new google.maps.places.Autocomplete($("#destino")[0], {});
     autocompleteDestino.bindTo('bounds', app.map);
     let detalleUbicacionDestino = new google.maps.InfoWindow();
     let markerDestino = app.crearMarcador(app.map);
@@ -29,13 +27,12 @@ const app = {
     app.crearListener(autocompleteDestino, detalleUbicacionDestino, markerDestino);
 
     /* Mi ubicación actual */
-    document.getElementById("encuentrame").addEventListener("click", app.buscarMiUbicacion);
+    $("#encuentrame").click(app.buscarMiUbicacion);
     /* Ruta */
     let directionsService = new google.maps.DirectionsService;
     let directionsDisplay = new google.maps.DirectionsRenderer;
 
     document.getElementById("ruta").addEventListener("click", function(){app.dibujarRuta(directionsService, directionsDisplay)});
-
     directionsDisplay.setMap(app.map);
 
 },
